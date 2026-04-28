@@ -73,7 +73,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen px-6 py-6 md:px-10 md:py-8 pr-6 md:pr-[380px]">
+    <div className="min-h-screen px-3 py-4 sm:px-6 sm:py-6 md:px-10 md:py-8 md:pr-[380px]">
       {/* Ambient glow */}
       <div className="pointer-events-none fixed inset-0 -z-10 opacity-60">
         <div className="absolute -top-40 left-1/4 h-[500px] w-[500px] rounded-full bg-primary/20 blur-[120px]" />
@@ -81,15 +81,15 @@ const Index = () => {
       </div>
 
       {/* Header */}
-      <header className="mb-8 flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <div className="text-xs uppercase tracking-[0.5em] text-primary text-glow-pink">LIVE · ON AIR</div>
-          <h1 className="font-display text-6xl md:text-7xl leading-none">
+      <header className="mb-6 sm:mb-8 flex flex-wrap items-center justify-between gap-3 sm:gap-4 pr-14 md:pr-0">
+        <div className="min-w-0">
+          <div className="text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-[0.5em] text-primary text-glow-pink">LIVE · ON AIR</div>
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl leading-none">
             <span className="text-foreground">GIFT</span>
             <span className="text-gold text-glow-gold"> THRONE </span>
             <span className="text-primary text-glow-pink">🔥</span>
           </h1>
-          <p className="mt-1 text-muted-foreground">Climb the ranks. Claim the crown. Get the shoutout.</p>
+          <p className="mt-1 text-xs sm:text-base text-muted-foreground">Climb the ranks. Claim the crown. Get the shoutout.</p>
         </div>
         <SessionTimer endsAt={endsAt} />
       </header>
@@ -116,8 +116,8 @@ const Index = () => {
       </section>
 
       {/* Footer hype strip */}
-      <footer className="mt-10 overflow-hidden rounded-2xl border-2 border-primary/30 bg-gradient-primary/10 p-6 text-center">
-        <div className="font-display text-2xl md:text-4xl text-foreground">
+      <footer className="mt-6 sm:mt-10 overflow-hidden rounded-2xl border-2 border-primary/30 bg-gradient-primary/10 p-3 sm:p-6 text-center">
+        <div className="font-display text-base sm:text-2xl md:text-4xl text-foreground">
           🎁 SEND A GIFT · CLIMB THE BOARD · 🥉 → 🥈 → 🥇 → 💎
         </div>
       </footer>
