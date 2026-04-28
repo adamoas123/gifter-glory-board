@@ -4,10 +4,150 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MM TV</title>
-    <meta name="description" content="MM TV website" />
+    <meta
+      name="description"
+      content="MM TV is a bold broadcast landing page with live programming highlights and featured shows."
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="site-shell"></main>
+    <main class="site-shell">
+      <header class="topbar reveal">
+        <a class="brand-lockup" href="#home" aria-label="MM TV Home">
+          <span class="brand-mark">MM</span>
+          <span class="brand-text">
+            <strong>MM TV</strong>
+            <small>Always On Air</small>
+          </span>
+        </a>
+
+        <nav class="top-nav" aria-label="Primary">
+          <a href="#shows">Shows</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+
+      <section class="hero reveal" id="home">
+        <div class="hero-copy">
+          <p class="eyebrow">Live Broadcast Energy</p>
+          <h1>MM TV turns everyday watching into a full-stage moment.</h1>
+          <p class="hero-text">
+            From sharp studio talk to music specials and headline recaps, MM TV
+            is built to feel loud, polished, and impossible to scroll past.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button" href="#shows">See Featured Shows</a>
+            <a class="button button-secondary" href="#contact">Book A Slot</a>
+          </div>
+        </div>
+
+        <aside class="broadcast-card">
+          <p class="card-label">Live Now</p>
+          <h2>Studio Session 08</h2>
+          <p class="card-copy">
+            A high-energy block blending interviews, audience reactions, and
+            performance clips in one nonstop run.
+          </p>
+
+          <dl class="signal-grid">
+            <div>
+              <dt>Signal</dt>
+              <dd>24/7</dd>
+            </div>
+            <div>
+              <dt>Format</dt>
+              <dd>HD</dd>
+            </div>
+            <div>
+              <dt>Focus</dt>
+              <dd>Music + Culture</dd>
+            </div>
+            <div>
+              <dt>Audience</dt>
+              <dd>Global</dd>
+            </div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="stats reveal" aria-label="Channel highlights">
+        <article class="stat-card">
+          <strong>12+</strong>
+          <span>Original show formats</span>
+        </article>
+        <article class="stat-card">
+          <strong>7 days</strong>
+          <span>Weekly programming loop</span>
+        </article>
+        <article class="stat-card">
+          <strong>Live-first</strong>
+          <span>Built for instant audience reaction</span>
+        </article>
+      </section>
+
+      <section class="section reveal" id="shows">
+        <div class="section-copy">
+          <p class="eyebrow">Featured Lineup</p>
+          <h2>Shows designed to feel fast, bright, and replayable.</h2>
+        </div>
+
+        <div class="show-grid">
+          <article class="show-card">
+            <p class="show-time">06:00 PM</p>
+            <h3>Pulse Check</h3>
+            <p>
+              Daily breakdowns of trends, music drops, and cultural flashpoints.
+            </p>
+          </article>
+          <article class="show-card">
+            <p class="show-time">08:00 PM</p>
+            <h3>Spotlight Room</h3>
+            <p>
+              Deep-dive interviews with creators, hosts, and breakout guests.
+            </p>
+          </article>
+          <article class="show-card">
+            <p class="show-time">10:00 PM</p>
+            <h3>After Hours Mix</h3>
+            <p>
+              A late block of visuals, live cuts, and crowd-driven selections.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="feature-band reveal" id="about">
+        <div class="feature-copy">
+          <p class="eyebrow">About The Channel</p>
+          <h2>Built for brands, viewers, and guests who want more than a flat stream.</h2>
+          <p>
+            MM TV combines broadcast polish with digital speed. The result is a
+            channel look that feels modern on mobile, strong on desktop, and
+            ready for real schedule updates when you add them.
+          </p>
+        </div>
+
+        <blockquote class="quote-card">
+          “A clean launch page should still feel like a channel, not a blank
+          placeholder.”
+        </blockquote>
+      </section>
+
+      <section class="cta reveal" id="contact">
+        <p class="eyebrow">Ready To Grow</p>
+        <h2>Use this live page as the base for your real MM TV schedule, stream links, and promos.</h2>
+        <a class="button" href="#home">Back To Top</a>
+      </section>
+
+      <footer class="site-footer reveal">
+        <p>MM TV</p>
+        <p>Broadcast starter site</p>
+        <p>&copy; <span id="current-year"></span></p>
+      </footer>
+    </main>
+
+    <script src="script.js"></script>
   </body>
 </html>

@@ -1,6 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap");
+
 :root {
-  --page-bg: #ffffff;
-  --text: #111111;
+  --page-bg: #f6efe6;
+  --text-main: #24130d;
+  --text-soft: #714b3c;
+  --surface: rgba(255, 248, 240, 0.78);
+  --surface-strong: #fff8f0;
+  --line: rgba(78, 38, 25, 0.12);
+  --accent: #cf5d2d;
+  --accent-deep: #8e2817;
+  --accent-warm: #ffca7a;
+  --shadow: 0 24px 70px rgba(100, 43, 19, 0.14);
 }
 
 * {
@@ -14,11 +24,452 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--page-bg);
-  color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(255, 207, 132, 0.65), transparent 28%),
+    radial-gradient(circle at top right, rgba(207, 93, 45, 0.2), transparent 25%),
+    linear-gradient(180deg, #f9f0e5 0%, #f6efe6 50%, #fff8f1 100%);
+  color: var(--text-main);
+  font-family: "Manrope", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 .site-shell {
+  width: min(1120px, calc(100% - 2rem));
   min-height: 100vh;
+  margin: 0 auto;
+  padding: 1.2rem 0 4rem;
+}
+
+.topbar,
+.hero,
+.stats,
+.section,
+.feature-band,
+.cta,
+.site-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 248, 240, 0.75);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 12px 40px rgba(92, 49, 29, 0.08);
+}
+
+.brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.95rem;
+  background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+  color: #fff8ef;
+  font-family: "Sora", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.brand-text {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.brand-text strong,
+.eyebrow,
+.button,
+.show-time,
+.card-label,
+.top-nav a {
+  font-family: "Sora", sans-serif;
+}
+
+.brand-text strong {
+  font-size: 0.98rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.brand-text small {
+  color: var(--text-soft);
+  font-size: 0.82rem;
+}
+
+.top-nav {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.top-nav a {
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  transition: color 180ms ease;
+}
+
+.top-nav a:hover,
+.top-nav a:focus-visible {
+  color: var(--accent-deep);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+  gap: 1.5rem;
+  align-items: stretch;
+  margin-bottom: 1.6rem;
+}
+
+.hero-copy,
+.broadcast-card,
+.stat-card,
+.show-card,
+.feature-band,
+.cta {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.hero-copy {
+  padding: 2.5rem;
+  border-radius: 2rem;
+}
+
+.eyebrow {
+  margin: 0 0 1rem;
+  color: var(--accent-deep);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero h1,
+.section h2,
+.feature-copy h2,
+.cta h2 {
+  margin: 0;
+  font-family: "Sora", sans-serif;
+  line-height: 1.02;
+}
+
+.hero h1 {
+  font-size: clamp(2.8rem, 6vw, 5.6rem);
+  max-width: 11ch;
+}
+
+.hero-text,
+.card-copy,
+.show-card p,
+.feature-copy p,
+.cta h2,
+.site-footer {
+  color: var(--text-soft);
+}
+
+.hero-text {
+  max-width: 56ch;
+  margin: 1.25rem 0 0;
+  font-size: 1.06rem;
+  line-height: 1.75;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.8rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.35rem;
+  padding: 0.9rem 1.4rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+  color: #fff8f0;
+  font-size: 0.92rem;
+  font-weight: 700;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.button:hover,
+.button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(142, 40, 23, 0.24);
+}
+
+.button-secondary {
+  background: rgba(255, 248, 240, 0.85);
+  color: var(--accent-deep);
+  border: 1px solid rgba(142, 40, 23, 0.14);
+}
+
+.broadcast-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.8rem;
+  border-radius: 1.8rem;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 248, 240, 0.96), rgba(247, 223, 199, 0.82)),
+    linear-gradient(135deg, rgba(255, 202, 122, 0.2), rgba(207, 93, 45, 0.22));
+}
+
+.card-label,
+.show-time {
+  margin: 0 0 0.8rem;
+  color: var(--accent-deep);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.broadcast-card h2 {
+  margin: 0 0 0.7rem;
+  font-family: "Sora", sans-serif;
+  font-size: 2rem;
+}
+
+.card-copy {
+  margin: 0;
+  line-height: 1.7;
+}
+
+.signal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.8rem 0 0;
+}
+
+.signal-grid div {
+  padding: 0.95rem 1rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(142, 40, 23, 0.1);
+}
+
+.signal-grid dt {
+  color: var(--text-soft);
+  font-size: 0.82rem;
+}
+
+.signal-grid dd {
+  margin: 0.3rem 0 0;
+  font-family: "Sora", sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.6rem;
+}
+
+.stat-card {
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+}
+
+.stat-card strong {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-family: "Sora", sans-serif;
+  font-size: 1.7rem;
+}
+
+.section,
+.feature-band,
+.cta {
+  border-radius: 2rem;
+  margin-bottom: 1.6rem;
+}
+
+.section {
+  padding: 2rem;
+}
+
+.section-copy {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.section h2,
+.feature-copy h2,
+.cta h2 {
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  max-width: 13ch;
+}
+
+.show-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.show-card {
+  padding: 1.45rem;
+  border-radius: 1.4rem;
+  background:
+    linear-gradient(180deg, rgba(255, 248, 240, 0.96), rgba(255, 241, 228, 0.88));
+}
+
+.show-card h3 {
+  margin: 0 0 0.7rem;
+  font-family: "Sora", sans-serif;
+  font-size: 1.35rem;
+}
+
+.show-card p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+.feature-band {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.feature-copy p {
+  max-width: 58ch;
+  line-height: 1.8;
+}
+
+.quote-card {
+  margin: 0;
+  padding: 1.6rem;
+  border-radius: 1.6rem;
+  background: linear-gradient(135deg, rgba(207, 93, 45, 0.12), rgba(255, 202, 122, 0.34));
+  color: var(--accent-deep);
+  font-family: "Sora", sans-serif;
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+.cta {
+  padding: 2rem;
+  text-align: center;
+  background:
+    linear-gradient(135deg, rgba(255, 202, 122, 0.38), rgba(207, 93, 45, 0.18)),
+    var(--surface-strong);
+}
+
+.cta h2 {
+  max-width: 18ch;
+  margin: 0 auto 1.5rem;
+}
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0 0.5rem;
+  font-size: 0.92rem;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 700ms ease,
+    transform 700ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+  .hero,
+  .feature-band,
+  .show-grid,
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    border-radius: 1.6rem;
+    padding: 1rem;
+  }
+
+  .hero-copy,
+  .section,
+  .feature-band,
+  .cta {
+    padding: 1.5rem;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+  }
+
+  .section h2,
+  .feature-copy h2,
+  .cta h2 {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-shell {
+    width: min(100% - 1rem, 1120px);
+    padding-top: 0.6rem;
+  }
+
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .top-nav {
+    gap: 0.8rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+
+  .signal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer {
+    flex-direction: column;
+  }
 }
