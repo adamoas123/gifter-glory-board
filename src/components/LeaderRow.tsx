@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Gifter, getRank } from "@/lib/gifters";
 
 interface Props {
@@ -58,22 +59,12 @@ export const LeaderRow = ({ gifter, rank, leaderGifts, aboveGifts, flash }: Prop
             <span className="hidden sm:inline">{rankInfo.label}</span>
           </span>
         </div>
-        <div className="mt-0.5 text-[11px] sm:text-xs text-muted-foreground leading-tight truncate">
-          {isFirst ? (
-            <span className="text-gold/90 font-semibold">👑 Ruling the throne</span>
-          ) : gapToAbove > 0 ? (
-            <>
-              <span className="font-bold text-primary">-{gapToAbove}</span>
-              <span className="sm:hidden"> to #{rank - 1}</span>
-              <span className="hidden sm:inline"> gift{gapToAbove === 1 ? "" : "s"} behind #{rank - 1}</span>
-              {rank > 2 && (
-                <>
-                  {" "}· <span className="text-gold/80">{gapToFirst} from #1</span>
-                </>
-              )}
-            </>
-          ) : null}
-        </div>
+        <GapText
+          isFirst={isFirst}
+          rank={rank}
+          gapToAbove={gapToAbove}
+          gapToFirst={gapToFirst}
+        />
       </div>
 
       {/* Gift count */}
