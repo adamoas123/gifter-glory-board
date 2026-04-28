@@ -81,21 +81,21 @@ const Index = () => {
       </div>
 
       {/* Header */}
-      <header className="mb-3 sm:mb-8 flex flex-wrap items-center justify-between gap-2 sm:gap-4 pr-14 md:pr-0">
+      <header className="mb-3 sm:mb-4 flex flex-wrap items-center justify-between gap-2 sm:gap-4 pr-14 md:pr-0">
         <div className="min-w-0">
           <div className="text-[9px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-[0.5em] text-primary text-glow-pink">LIVE · ON AIR</div>
-          <h1 className="font-display text-3xl sm:text-6xl md:text-7xl leading-none">
+          <h1 className="font-display text-3xl sm:text-5xl md:text-6xl leading-none">
             <span className="text-foreground">GIFT</span>
             <span className="text-gold text-glow-gold"> THRONE </span>
             <span className="text-primary text-glow-pink">🔥</span>
           </h1>
-          <p className="mt-0.5 sm:mt-1 text-[11px] sm:text-base text-muted-foreground hidden sm:block">Climb the ranks. Claim the crown. Get the shoutout.</p>
+          <p className="mt-0.5 text-[11px] sm:text-sm text-muted-foreground hidden sm:block">Climb the ranks. Claim the crown. Get the shoutout.</p>
         </div>
         <SessionTimer endsAt={endsAt} />
       </header>
 
       {/* Leaderboard */}
-      <section className="space-y-1.5 sm:space-y-4">
+      <section className="space-y-1.5 sm:space-y-2">
         {top5.length === 0 ? (
           <div className="rounded-2xl border-2 border-dashed border-border p-16 text-center">
             <div className="font-display text-4xl text-muted-foreground">NO GIFTERS YET</div>
@@ -116,8 +116,8 @@ const Index = () => {
       </section>
 
       {/* Footer hype strip */}
-      <footer className="mt-3 sm:mt-10 overflow-hidden rounded-xl sm:rounded-2xl border-2 border-primary/30 bg-gradient-primary/10 p-2 sm:p-6 text-center">
-        <div className="font-display text-sm sm:text-2xl md:text-4xl text-foreground">
+      <footer className="mt-3 sm:mt-4 overflow-hidden rounded-xl sm:rounded-2xl border-2 border-primary/30 bg-gradient-primary/10 p-2 sm:p-3 text-center">
+        <div className="font-display text-sm sm:text-xl md:text-2xl text-foreground">
           🎁 SEND A GIFT · CLIMB THE BOARD · 🥉 → 🥈 → 🥇 → 💎
         </div>
       </footer>
