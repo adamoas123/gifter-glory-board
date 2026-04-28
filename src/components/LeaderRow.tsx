@@ -81,3 +81,92 @@ export const LeaderRow = ({ gifter, rank, leaderGifts, aboveGifts, flash }: Prop
     </div>
   );
 };
+
+/**
+ * Gap text that abbreviates based on available width.
+ * Tiers (widest → narrowest):
+ *   T3: "Only 3 gifts behind #1 · 12 from #1"
+ *   T2: "3 behind #1 · 12 from #1"
+ *   T1: "-3 to #1"
+ *   T0: "-3"
+ */
+interface GapTextProps {
+  isFirst: boolean;
+  rank: number;
+  gapToAbove: number;
+  gapToFirst: number;
+}
+
+const GapText = ({ isFirst, rank, gapToAbove, gapToFirst }: GapTextProps) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [tier, setTier] = useState(3);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const ro = new ResizeObserver((entries) => {
+      const w = entries[0].contentRect.width;
+      // breakpoints tuned for typical leaderboard row widths
+      if (w < 90) setTier(0);
+      else if (w < 160) setTier(1);
+      else if (w < 280) setTier(2);
+      else setTier(3);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const content = (() => {
+    if (isFirst) {
+      return <span className="text-gold/90 font-semibold">👑 Ruling the throne</span>;
+    }
+    if (gapToAbove <= 0) return null;
+
+    const giftWord = gapToAbove === 1 ? "gift" : "gifts";
+    const showFromFirst = rank > 2;
+
+    switch (tier) {
+      case 0:
+        return <span className="font-bold text-primary">-{gapToAbove}</span>;
+      case 1:
+        return (
+          <>
+            <span className="font-bold text-primary">-{gapToAbove}</span>
+            <span> to #{rank - 1}</span>
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <span className="font-bold text-primary">{gapToAbove}</span>
+            <span> behind #{rank - 1}</span>
+            {showFromFirst && (
+              <>
+                {" "}· <span className="text-gold/80">{gapToFirst} from #1</span>
+              </>
+            )}
+          </>
+        );
+      default:
+        return (
+          <>
+            Only <span className="font-bold text-primary">{gapToAbove}</span> {giftWord} behind #{rank - 1}
+            {showFromFirst && (
+              <>
+                {" "}· <span className="text-gold/80">{gapToFirst} from #1</span>
+              </>
+            )}
+          </>
+        );
+    }
+  })();
+
+  return (
+    <div
+      ref={ref}
+      className="mt-0.5 text-[11px] sm:text-xs text-muted-foreground leading-tight truncate"
+    >
+      {content}
+    </div>
+  );
+};
