@@ -148,9 +148,10 @@ export const AdminPanel = ({ gifters, onAdd, onAdjust, onRemove, onShoutout, onS
           onClick={onReset}
           size="sm"
           className="w-full border-destructive/50 text-destructive hover:bg-destructive/10"
-      >
-        <RotateCcw className="mr-2 h-4 w-4" /> Reset board
-      </Button>
+        >
+          <RotateCcw className="mr-2 h-4 w-4" /> Reset board
+        </Button>
+      </div>
     </aside>
   );
 };
