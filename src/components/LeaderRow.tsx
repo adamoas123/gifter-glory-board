@@ -22,13 +22,13 @@ export const LeaderRow = ({ gifter, rank, leaderGifts, aboveGifts, flash }: Prop
 
   return (
     <div
-      className={`relative flex items-center gap-2.5 sm:gap-5 rounded-xl sm:rounded-2xl border-2 px-2.5 py-2 sm:p-5 transition-all duration-500 ${
+      className={`relative flex items-center gap-2.5 sm:gap-4 rounded-xl sm:rounded-2xl border-2 px-2.5 py-2 sm:px-4 sm:py-3 transition-all duration-500 ${
         RANK_STYLES[rank] ?? "border-border bg-card/60"
       } ${flash ? "animate-rank-flash" : ""}`}
     >
       {/* Rank number */}
       <div
-        className={`flex h-10 w-10 sm:h-20 sm:w-20 shrink-0 items-center justify-center rounded-lg sm:rounded-xl font-display text-xl sm:text-5xl ${
+        className={`flex h-10 w-10 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-lg sm:rounded-xl font-display text-xl sm:text-3xl ${
           isFirst
             ? "bg-gradient-gold text-gold-foreground"
             : rank === 2
@@ -43,22 +43,22 @@ export const LeaderRow = ({ gifter, rank, leaderGifts, aboveGifts, flash }: Prop
 
       {/* Name + badge */}
       <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-1.5 sm:gap-3 flex-nowrap sm:flex-wrap">
+        <div className="flex items-center gap-1.5 sm:gap-2.5 flex-nowrap">
           <h3
-            className={`font-display text-xl sm:text-4xl leading-none truncate ${
+            className={`font-display text-xl sm:text-3xl leading-none truncate ${
               isFirst ? "text-gold text-glow-gold" : "text-foreground"
             }`}
           >
             {gifter.name}
           </h3>
           <span
-            className={`shrink-0 inline-flex items-center gap-1 rounded-full border px-1.5 py-0 sm:px-3 sm:py-1 text-[9px] sm:text-xs font-bold uppercase tracking-wider ${rankInfo.bgClass} ${rankInfo.colorClass}`}
+            className={`shrink-0 inline-flex items-center gap-1 rounded-full border px-1.5 py-0 sm:px-2 sm:py-0.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider ${rankInfo.bgClass} ${rankInfo.colorClass}`}
           >
             <span>{rankInfo.emoji}</span>
             <span className="hidden sm:inline">{rankInfo.label}</span>
           </span>
         </div>
-        <div className="mt-0.5 sm:mt-1 text-[11px] sm:text-sm text-muted-foreground leading-tight truncate">
+        <div className="mt-0.5 text-[11px] sm:text-xs text-muted-foreground leading-tight truncate">
           {isFirst ? (
             <span className="text-gold/90 font-semibold">👑 Ruling the throne</span>
           ) : gapToAbove > 0 ? (
@@ -79,13 +79,13 @@ export const LeaderRow = ({ gifter, rank, leaderGifts, aboveGifts, flash }: Prop
       {/* Gift count */}
       <div className="text-right shrink-0">
         <div
-          className={`font-display text-2xl sm:text-6xl leading-none ${
+          className={`font-display text-2xl sm:text-4xl leading-none ${
             isFirst ? "text-gold text-glow-gold" : "text-foreground"
           }`}
         >
           {gifter.gifts}
         </div>
-        <div className="text-[9px] sm:text-xs uppercase tracking-widest text-muted-foreground">gifts</div>
+        <div className="text-[9px] sm:text-[10px] uppercase tracking-widest text-muted-foreground">gifts</div>
       </div>
     </div>
   );
