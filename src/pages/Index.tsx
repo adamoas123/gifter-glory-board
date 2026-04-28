@@ -73,7 +73,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen px-2 py-2 sm:px-6 sm:py-6 md:px-10 md:py-8 md:pr-[380px]">
+    <div className="min-h-screen px-2 py-2 sm:px-6 sm:py-4 md:px-8 md:py-5 md:pr-[360px]">
       {/* Ambient glow */}
       <div className="pointer-events-none fixed inset-0 -z-10 opacity-60">
         <div className="absolute -top-40 left-1/4 h-[500px] w-[500px] rounded-full bg-primary/20 blur-[120px]" />

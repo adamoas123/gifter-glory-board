@@ -20,7 +20,7 @@ export const SessionTimer = ({ endsAt }: Props) => {
 
   return (
     <div
-      className={`flex items-center gap-2 sm:gap-3 rounded-2xl border-2 px-4 py-2 sm:px-6 sm:py-3 transition-all ${
+      className={`flex items-center gap-2 sm:gap-2.5 rounded-xl sm:rounded-2xl border-2 px-4 py-2 sm:px-4 sm:py-2 transition-all ${
         critical
           ? "border-primary bg-primary/10 animate-pulse-pink"
           : over
@@ -30,9 +30,9 @@ export const SessionTimer = ({ endsAt }: Props) => {
     >
       <span className="text-xl sm:text-2xl">⏱️</span>
       <div>
-        <div className="text-[10px] sm:text-xs uppercase tracking-widest text-muted-foreground">Session ends in</div>
+        <div className="text-[10px] sm:text-[10px] uppercase tracking-widest text-muted-foreground">Session ends in</div>
         <div
-          className={`font-display text-2xl sm:text-4xl leading-none ${
+          className={`font-display text-2xl sm:text-3xl leading-none ${
             critical ? "text-primary text-glow-pink" : over ? "text-destructive" : "text-gold text-glow-gold"
           }`}
         >
