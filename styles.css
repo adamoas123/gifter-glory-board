@@ -1,0 +1,24 @@
+:root {
+  --page-bg: #ffffff;
+  --text: #111111;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--page-bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.site-shell {
+  min-height: 100vh;
+}
