@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const AdminPanel = ({ gifters, onAdd, onAdjust, onRemove, onShoutout, onSetTimer, onReset }: Props) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(() => typeof window !== "undefined" ? window.innerWidth >= 768 : true);
   const [name, setName] = useState("");
   const [gifts, setGifts] = useState("");
   const [mins, setMins] = useState("10");
