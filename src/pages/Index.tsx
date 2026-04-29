@@ -143,7 +143,17 @@ const Index = () => {
           </h1>
           <p className="mt-0.5 text-[11px] sm:text-sm text-muted-foreground hidden sm:block">Climb the ranks. Claim the crown. Get the shoutout.</p>
         </div>
-        <SessionTimer endsAt={endsAt} />
+        <div className="flex items-center gap-2">
+          <button
+            onClick={toggleMuted}
+            aria-label={muted ? "Unmute cues" : "Mute cues"}
+            title={muted ? "Cues muted" : "Cues on"}
+            className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg border-2 border-border bg-card/60 text-muted-foreground transition-colors hover:text-foreground hover:border-primary/50"
+          >
+            {muted ? <VolumeX className="h-4 w-4 sm:h-5 sm:w-5" /> : <Volume2 className="h-4 w-4 sm:h-5 sm:w-5" />}
+          </button>
+          <SessionTimer endsAt={endsAt} />
+        </div>
       </header>
 
       {/* Leaderboard */}
