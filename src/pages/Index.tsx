@@ -5,6 +5,7 @@ import { SessionTimer } from "@/components/SessionTimer";
 import { ShoutoutOverlay } from "@/components/ShoutoutOverlay";
 import { TakeoverBanner } from "@/components/TakeoverBanner";
 import { AdminPanel } from "@/components/AdminPanel";
+import { useMomentum } from "@/hooks/use-momentum";
 
 const SEED: Gifter[] = [
   { id: "1", name: "NEONKING", gifts: 87 },
