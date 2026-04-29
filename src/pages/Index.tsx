@@ -26,8 +26,20 @@ const Index = () => {
 
   const sorted = useMemo(() => [...gifters].sort((a, b) => b.gifts - a.gifts), [gifters]);
   const top5 = sorted.slice(0, 5);
+  const momentum = useMomentum(gifters);
 
-  // Detect leader takeover
+  // Track previous rank per gifter for ▲▼ pulse
+  const prevRanksRef = useRef<Record<string, number>>({});
+  const prevRanks = prevRanksRef.current;
+  const currentRanks: Record<string, number> = {};
+  sorted.forEach((g, i) => (currentRanks[g.id] = i + 1));
+  useEffect(() => {
+    prevRanksRef.current = currentRanks;
+  });
+
+  // Threat: leader's #2 within 5 gifts
+  const challengerGap = top5.length >= 2 ? top5[0].gifts - top5[1].gifts : Infinity;
+  const threatActive = challengerGap > 0 && challengerGap <= 5;
   useEffect(() => {
     const leader = sorted[0];
     if (!leader) {
