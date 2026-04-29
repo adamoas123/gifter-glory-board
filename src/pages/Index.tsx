@@ -6,6 +6,8 @@ import { ShoutoutOverlay } from "@/components/ShoutoutOverlay";
 import { TakeoverBanner } from "@/components/TakeoverBanner";
 import { AdminPanel } from "@/components/AdminPanel";
 import { useMomentum } from "@/hooks/use-momentum";
+import { useCues } from "@/hooks/use-cues";
+import { Volume2, VolumeX } from "lucide-react";
 
 const SEED: Gifter[] = [
   { id: "1", name: "NEONKING", gifts: 87 },
