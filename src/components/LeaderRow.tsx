@@ -166,7 +166,9 @@ const GapText = ({ isFirst, rank, gapToAbove, gapToFirst }: GapTextProps) => {
       ref={ref}
       className="mt-0.5 text-[11px] sm:text-xs text-muted-foreground leading-tight truncate"
     >
-      {content}
+      <span key={tier} className="inline-block animate-tier-fade">
+        {content}
+      </span>
     </div>
   );
 };
