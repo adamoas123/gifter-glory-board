@@ -6,6 +6,8 @@ import { ShoutoutOverlay } from "@/components/ShoutoutOverlay";
 import { TakeoverBanner } from "@/components/TakeoverBanner";
 import { AdminPanel } from "@/components/AdminPanel";
 import { useMomentum } from "@/hooks/use-momentum";
+import { useCues } from "@/hooks/use-cues";
+import { Volume2, VolumeX } from "lucide-react";
 
 const SEED: Gifter[] = [
   { id: "1", name: "NEONKING", gifts: 87 },
@@ -23,6 +25,10 @@ const Index = () => {
   const [flashId, setFlashId] = useState<string | null>(null);
 
   const prevLeaderRef = useRef<string | null>(null);
+  const { muted, toggleMuted, play } = useCues();
+  const lastApproachAtRef = useRef(0);
+  const lastSwapAtRef = useRef(0);
+  const prevChallengerGapRef = useRef<number>(Infinity);
 
   const sorted = useMemo(() => [...gifters].sort((a, b) => b.gifts - a.gifts), [gifters]);
   const top5 = sorted.slice(0, 5);
@@ -34,12 +40,44 @@ const Index = () => {
   const currentRanks: Record<string, number> = {};
   sorted.forEach((g, i) => (currentRanks[g.id] = i + 1));
   useEffect(() => {
+    // Detect rank swaps within top 3 (excluding leader takeover, which has its own cue)
+    const now = Date.now();
+    let swapped = false;
+    for (const g of top5.slice(0, 3)) {
+      const prev = prevRanks[g.id];
+      const curr = currentRanks[g.id];
+      if (prev !== undefined && prev !== curr && curr !== 1 && prev !== 1) {
+        swapped = true;
+        break;
+      }
+    }
+    if (swapped && now - lastSwapAtRef.current > 800) {
+      lastSwapAtRef.current = now;
+      play("swap");
+    }
     prevRanksRef.current = currentRanks;
   });
 
   // Threat: leader's #2 within 5 gifts
   const challengerGap = top5.length >= 2 ? top5[0].gifts - top5[1].gifts : Infinity;
   const threatActive = challengerGap > 0 && challengerGap <= 5;
+
+  // Approach cue: gap shrinks AND crosses into the danger zone (≤5)
+  useEffect(() => {
+    const prev = prevChallengerGapRef.current;
+    const now = Date.now();
+    if (
+      challengerGap < prev &&
+      challengerGap > 0 &&
+      challengerGap <= 5 &&
+      now - lastApproachAtRef.current > 1500
+    ) {
+      lastApproachAtRef.current = now;
+      play("approach");
+    }
+    prevChallengerGapRef.current = challengerGap;
+  }, [challengerGap, play]);
+
   useEffect(() => {
     const leader = sorted[0];
     if (!leader) {
@@ -49,6 +87,7 @@ const Index = () => {
     if (prevLeaderRef.current && prevLeaderRef.current !== leader.id) {
       setTakeover(leader.name);
       setFlashId(leader.id);
+      play("takeover");
       const t = setTimeout(() => setTakeover(null), 3500);
       const t2 = setTimeout(() => setFlashId(null), 1800);
       prevLeaderRef.current = leader.id;
@@ -104,7 +143,17 @@ const Index = () => {
           </h1>
           <p className="mt-0.5 text-[11px] sm:text-sm text-muted-foreground hidden sm:block">Climb the ranks. Claim the crown. Get the shoutout.</p>
         </div>
-        <SessionTimer endsAt={endsAt} />
+        <div className="flex items-center gap-2">
+          <button
+            onClick={toggleMuted}
+            aria-label={muted ? "Unmute cues" : "Mute cues"}
+            title={muted ? "Cues muted" : "Cues on"}
+            className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg border-2 border-border bg-card/60 text-muted-foreground transition-colors hover:text-foreground hover:border-primary/50"
+          >
+            {muted ? <VolumeX className="h-4 w-4 sm:h-5 sm:w-5" /> : <Volume2 className="h-4 w-4 sm:h-5 sm:w-5" />}
+          </button>
+          <SessionTimer endsAt={endsAt} />
+        </div>
       </header>
 
       {/* Leaderboard */}
