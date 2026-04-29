@@ -17,15 +17,25 @@ interface Props {
 export const AdminPanel = ({ gifters, onAdd, onAdjust, onRemove, onShoutout, onSetTimer, onReset }: Props) => {
   const [open, setOpen] = useState(() => typeof window !== "undefined" ? window.innerWidth >= 768 : true);
   const [name, setName] = useState("");
-  const [gifts, setGifts] = useState("");
+  const [coins, setCoins] = useState("");
   const [mins, setMins] = useState("10");
+  const [customAmounts, setCustomAmounts] = useState<Record<string, string>>({});
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) return;
-    onAdd(name.trim(), parseInt(gifts) || 0);
+    onAdd(name.trim(), parseInt(coins) || 0);
     setName("");
-    setGifts("");
+    setCoins("");
+  };
+
+  const PRESETS = [1, 5, 10, 50, 100, 500];
+
+  const sendCustom = (id: string) => {
+    const v = parseInt(customAmounts[id] || "0");
+    if (!v) return;
+    onAdjust(id, v);
+    setCustomAmounts((s) => ({ ...s, [id]: "" }));
   };
 
   if (!open) {
