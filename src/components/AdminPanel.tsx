@@ -17,15 +17,25 @@ interface Props {
 export const AdminPanel = ({ gifters, onAdd, onAdjust, onRemove, onShoutout, onSetTimer, onReset }: Props) => {
   const [open, setOpen] = useState(() => typeof window !== "undefined" ? window.innerWidth >= 768 : true);
   const [name, setName] = useState("");
-  const [gifts, setGifts] = useState("");
+  const [coins, setCoins] = useState("");
   const [mins, setMins] = useState("10");
+  const [customAmounts, setCustomAmounts] = useState<Record<string, string>>({});
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) return;
-    onAdd(name.trim(), parseInt(gifts) || 0);
+    onAdd(name.trim(), parseInt(coins) || 0);
     setName("");
-    setGifts("");
+    setCoins("");
+  };
+
+  const PRESETS = [1, 5, 10, 50, 100, 500];
+
+  const sendCustom = (id: string) => {
+    const v = parseInt(customAmounts[id] || "0");
+    if (!v) return;
+    onAdjust(id, v);
+    setCustomAmounts((s) => ({ ...s, [id]: "" }));
   };
 
   if (!open) {
@@ -90,10 +100,10 @@ export const AdminPanel = ({ gifters, onAdd, onAdjust, onRemove, onShoutout, onS
           />
           <Input
             type="number"
-            placeholder="Gifts"
-            value={gifts}
-            onChange={(e) => setGifts(e.target.value)}
-            className="h-8 bg-background text-sm w-16"
+            placeholder="Coins"
+            value={coins}
+            onChange={(e) => setCoins(e.target.value)}
+            className="h-8 bg-background text-sm w-20"
           />
           <Button type="submit" size="icon" className="h-8 w-8 shrink-0 bg-primary hover:bg-primary-glow">
             <Plus className="h-4 w-4" />
@@ -114,29 +124,64 @@ export const AdminPanel = ({ gifters, onAdd, onAdjust, onRemove, onShoutout, onS
           .slice()
           .sort((a, b) => b.gifts - a.gifts)
           .map((g) => (
-            <div key={g.id} className="flex items-center gap-1.5 rounded-md border border-border bg-background/60 px-2 py-1.5">
-              <div className="flex-1 min-w-0">
-                <div className="truncate text-sm font-semibold leading-tight">{g.name}</div>
-                <div className="text-[10px] text-muted-foreground leading-tight">{g.gifts} gifts</div>
+            <div key={g.id} className="rounded-md border border-border bg-background/60 px-2 py-1.5 space-y-1.5">
+              <div className="flex items-center gap-1.5">
+                <div className="flex-1 min-w-0">
+                  <div className="truncate text-sm font-semibold leading-tight">{g.name}</div>
+                  <div className="text-[10px] text-muted-foreground leading-tight">{g.gifts} coins</div>
+                </div>
+                <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => onAdjust(g.id, -1)}>
+                  <Minus className="h-3 w-3" />
+                </Button>
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  className="h-7 w-7 text-destructive"
+                  onClick={() => onRemove(g.id)}
+                >
+                  <Trash2 className="h-3 w-3" />
+                </Button>
               </div>
-              <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => onAdjust(g.id, -1)}>
-                <Minus className="h-3 w-3" />
-              </Button>
-              <Button
-                size="icon"
-                className="h-7 w-7 bg-primary hover:bg-primary-glow"
-                onClick={() => onAdjust(g.id, 1)}
-              >
-                <Plus className="h-3 w-3" />
-              </Button>
-              <Button
-                size="icon"
-                variant="ghost"
-                className="h-7 w-7 text-destructive"
-                onClick={() => onRemove(g.id)}
-              >
-                <Trash2 className="h-3 w-3" />
-              </Button>
+
+              {/* Custom amount + send */}
+              <div className="flex items-center gap-1">
+                <Input
+                  type="number"
+                  inputMode="numeric"
+                  min={1}
+                  placeholder="Coins sent"
+                  value={customAmounts[g.id] ?? ""}
+                  onChange={(e) => setCustomAmounts((s) => ({ ...s, [g.id]: e.target.value }))}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      sendCustom(g.id);
+                    }
+                  }}
+                  className="h-7 bg-background text-xs flex-1"
+                />
+                <Button
+                  size="sm"
+                  className="h-7 px-2 text-[11px] bg-primary hover:bg-primary-glow font-semibold"
+                  onClick={() => sendCustom(g.id)}
+                >
+                  <Plus className="h-3 w-3 mr-0.5" /> Send
+                </Button>
+              </div>
+
+              {/* Quick presets */}
+              <div className="flex flex-wrap gap-1">
+                {PRESETS.map((p) => (
+                  <button
+                    key={p}
+                    type="button"
+                    onClick={() => onAdjust(g.id, p)}
+                    className="rounded border border-border bg-background/80 px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground hover:bg-primary/20 hover:text-primary hover:border-primary/50 transition-colors"
+                  >
+                    +{p}
+                  </button>
+                ))}
+              </div>
             </div>
           ))}
       </div>
