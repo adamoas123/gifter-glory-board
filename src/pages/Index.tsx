@@ -116,14 +116,22 @@ const Index = () => {
           </div>
         ) : (
           top5.map((g, i) => (
-            <LeaderRow
-              key={g.id}
-              gifter={g}
-              rank={i + 1}
-              leaderGifts={top5[0].gifts}
-              aboveGifts={i === 0 ? null : top5[i - 1].gifts}
-              flash={flashId === g.id}
-            />
+            <div key={g.id} className="relative">
+              {i === 0 && threatActive && (
+                <div className="absolute -top-2 right-3 z-10 flex items-center gap-1 rounded-full border border-primary/60 bg-background/90 px-2 py-0.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-primary animate-threat-pulse">
+                  ⚠ Challenger closing in · {challengerGap}
+                </div>
+              )}
+              <LeaderRow
+                gifter={g}
+                rank={i + 1}
+                prevRank={prevRanks[g.id]}
+                leaderGifts={top5[0].gifts}
+                aboveGifts={i === 0 ? null : top5[i - 1].gifts}
+                flash={flashId === g.id}
+                momentum={momentum[g.id]}
+              />
+            </div>
           ))
         )}
       </section>
