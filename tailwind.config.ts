@@ -114,6 +114,45 @@ export default {
           "0%": { opacity: "0", transform: "translateY(-2px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        "throne-drop": {
+          "0%": { transform: "translate(-50%, -120%) scale(0.6) rotate(-4deg)", opacity: "0" },
+          "60%": { transform: "translate(-50%, 8px) scale(1.06) rotate(1deg)", opacity: "1" },
+          "80%": { transform: "translate(-50%, -4px) scale(0.98) rotate(-0.5deg)" },
+          "100%": { transform: "translate(-50%, 0) scale(1) rotate(0)", opacity: "1" },
+        },
+        "aura-pulse": {
+          "0%, 100%": { opacity: "0.5", transform: "scale(1)" },
+          "50%": { opacity: "0.9", transform: "scale(1.08)" },
+        },
+        "rays": {
+          "0%": { transform: "translate(-50%, -50%) rotate(0deg)" },
+          "100%": { transform: "translate(-50%, -50%) rotate(360deg)" },
+        },
+        "border-spin": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "sheen": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(200%)" },
+        },
+        "sparkle": {
+          "0%, 100%": { transform: "scale(0)", opacity: "0" },
+          "50%": { transform: "scale(1.4)", opacity: "1" },
+        },
+        "crown-bounce": {
+          "0%, 100%": { transform: "translateY(0) rotate(-5deg) scale(1)" },
+          "50%": { transform: "translateY(-8px) rotate(5deg) scale(1.15)" },
+        },
+        "name-pop": {
+          "0%": { transform: "scale(0.5)", opacity: "0", filter: "blur(8px)" },
+          "60%": { transform: "scale(1.1)", opacity: "1", filter: "blur(0)" },
+          "100%": { transform: "scale(1)", opacity: "1", filter: "blur(0)" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0", transform: "translateY(-4px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
