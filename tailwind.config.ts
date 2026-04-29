@@ -110,6 +110,10 @@ export default {
           "0%, 100%": { backgroundColor: "hsl(var(--card))" },
           "50%": { backgroundColor: "hsl(var(--primary) / 0.3)" },
         },
+        "tier-fade": {
+          "0%": { opacity: "0", transform: "translateY(-2px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -123,6 +127,7 @@ export default {
         "shake": "shake 0.4s ease-in-out",
         "flame": "flame 1.5s ease-in-out infinite",
         "rank-flash": "rank-flash 0.6s ease-in-out 3",
+        "tier-fade": "tier-fade 0.25s ease-out",
       },
     },
   },
