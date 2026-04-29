@@ -5,6 +5,7 @@ import { SessionTimer } from "@/components/SessionTimer";
 import { ShoutoutOverlay } from "@/components/ShoutoutOverlay";
 import { TakeoverBanner } from "@/components/TakeoverBanner";
 import { AdminPanel } from "@/components/AdminPanel";
+import { useMomentum } from "@/hooks/use-momentum";
 
 const SEED: Gifter[] = [
   { id: "1", name: "NEONKING", gifts: 87 },
@@ -25,8 +26,20 @@ const Index = () => {
 
   const sorted = useMemo(() => [...gifters].sort((a, b) => b.gifts - a.gifts), [gifters]);
   const top5 = sorted.slice(0, 5);
+  const momentum = useMomentum(gifters);
 
-  // Detect leader takeover
+  // Track previous rank per gifter for ▲▼ pulse
+  const prevRanksRef = useRef<Record<string, number>>({});
+  const prevRanks = prevRanksRef.current;
+  const currentRanks: Record<string, number> = {};
+  sorted.forEach((g, i) => (currentRanks[g.id] = i + 1));
+  useEffect(() => {
+    prevRanksRef.current = currentRanks;
+  });
+
+  // Threat: leader's #2 within 5 gifts
+  const challengerGap = top5.length >= 2 ? top5[0].gifts - top5[1].gifts : Infinity;
+  const threatActive = challengerGap > 0 && challengerGap <= 5;
   useEffect(() => {
     const leader = sorted[0];
     if (!leader) {
@@ -103,14 +116,22 @@ const Index = () => {
           </div>
         ) : (
           top5.map((g, i) => (
-            <LeaderRow
-              key={g.id}
-              gifter={g}
-              rank={i + 1}
-              leaderGifts={top5[0].gifts}
-              aboveGifts={i === 0 ? null : top5[i - 1].gifts}
-              flash={flashId === g.id}
-            />
+            <div key={g.id} className="relative">
+              {i === 0 && threatActive && (
+                <div className="absolute -top-2 right-3 z-10 flex items-center gap-1 rounded-full border border-primary/60 bg-background/90 px-2 py-0.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-primary animate-threat-pulse">
+                  ⚠ Challenger closing in · {challengerGap}
+                </div>
+              )}
+              <LeaderRow
+                gifter={g}
+                rank={i + 1}
+                prevRank={prevRanks[g.id]}
+                leaderGifts={top5[0].gifts}
+                aboveGifts={i === 0 ? null : top5[i - 1].gifts}
+                flash={flashId === g.id}
+                momentum={momentum[g.id]}
+              />
+            </div>
           ))
         )}
       </section>
