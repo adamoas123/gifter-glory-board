@@ -100,10 +100,10 @@ export const AdminPanel = ({ gifters, onAdd, onAdjust, onRemove, onShoutout, onS
           />
           <Input
             type="number"
-            placeholder="Gifts"
-            value={gifts}
-            onChange={(e) => setGifts(e.target.value)}
-            className="h-8 bg-background text-sm w-16"
+            placeholder="Coins"
+            value={coins}
+            onChange={(e) => setCoins(e.target.value)}
+            className="h-8 bg-background text-sm w-20"
           />
           <Button type="submit" size="icon" className="h-8 w-8 shrink-0 bg-primary hover:bg-primary-glow">
             <Plus className="h-4 w-4" />
