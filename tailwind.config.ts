@@ -110,6 +110,10 @@ export default {
           "0%, 100%": { backgroundColor: "hsl(var(--card))" },
           "50%": { backgroundColor: "hsl(var(--primary) / 0.3)" },
         },
+        "tier-fade": {
+          "0%": { opacity: "0", transform: "translateY(-2px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
