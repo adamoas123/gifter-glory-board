@@ -40,12 +40,44 @@ const Index = () => {
   const currentRanks: Record<string, number> = {};
   sorted.forEach((g, i) => (currentRanks[g.id] = i + 1));
   useEffect(() => {
+    // Detect rank swaps within top 3 (excluding leader takeover, which has its own cue)
+    const now = Date.now();
+    let swapped = false;
+    for (const g of top5.slice(0, 3)) {
+      const prev = prevRanks[g.id];
+      const curr = currentRanks[g.id];
+      if (prev !== undefined && prev !== curr && curr !== 1 && prev !== 1) {
+        swapped = true;
+        break;
+      }
+    }
+    if (swapped && now - lastSwapAtRef.current > 800) {
+      lastSwapAtRef.current = now;
+      play("swap");
+    }
     prevRanksRef.current = currentRanks;
   });
 
   // Threat: leader's #2 within 5 gifts
   const challengerGap = top5.length >= 2 ? top5[0].gifts - top5[1].gifts : Infinity;
   const threatActive = challengerGap > 0 && challengerGap <= 5;
+
+  // Approach cue: gap shrinks AND crosses into the danger zone (≤5)
+  useEffect(() => {
+    const prev = prevChallengerGapRef.current;
+    const now = Date.now();
+    if (
+      challengerGap < prev &&
+      challengerGap > 0 &&
+      challengerGap <= 5 &&
+      now - lastApproachAtRef.current > 1500
+    ) {
+      lastApproachAtRef.current = now;
+      play("approach");
+    }
+    prevChallengerGapRef.current = challengerGap;
+  }, [challengerGap, play]);
+
   useEffect(() => {
     const leader = sorted[0];
     if (!leader) {
@@ -55,6 +87,7 @@ const Index = () => {
     if (prevLeaderRef.current && prevLeaderRef.current !== leader.id) {
       setTakeover(leader.name);
       setFlashId(leader.id);
+      play("takeover");
       const t = setTimeout(() => setTakeover(null), 3500);
       const t2 = setTimeout(() => setFlashId(null), 1800);
       prevLeaderRef.current = leader.id;
