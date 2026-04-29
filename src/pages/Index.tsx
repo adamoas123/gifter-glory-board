@@ -139,7 +139,7 @@ const Index = () => {
       {/* Footer hype strip */}
       <footer className="mt-3 sm:mt-4 overflow-hidden rounded-xl sm:rounded-2xl border-2 border-primary/30 bg-gradient-primary/10 p-2 sm:p-3 text-center">
         <div className="font-display text-sm sm:text-xl md:text-2xl text-foreground">
-          🎁 SEND A GIFT · CLIMB THE BOARD · 🥉 → 🥈 → 🥇 → 💎
+          🎁 SEND COINS · CLIMB THE BOARD · 🥉 → 🥈 → 🥇 → 💎
         </div>
       </footer>
 
