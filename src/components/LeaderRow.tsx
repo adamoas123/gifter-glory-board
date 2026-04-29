@@ -139,7 +139,7 @@ export const LeaderRow = ({ gifter, rank, prevRank, leaderGifts, aboveGifts, fla
         >
           {gifter.gifts}
         </div>
-        <div className="text-[9px] sm:text-[10px] uppercase tracking-widest text-muted-foreground">gifts</div>
+        <div className="text-[9px] sm:text-[10px] uppercase tracking-widest text-muted-foreground">coins</div>
       </div>
     </div>
   );
@@ -184,7 +184,7 @@ const GapText = ({ isFirst, rank, gapToAbove, gapToFirst }: GapTextProps) => {
     }
     if (gapToAbove <= 0) return null;
 
-    const giftWord = gapToAbove === 1 ? "gift" : "gifts";
+    const coinWord = gapToAbove === 1 ? "coin" : "coins";
     const showFromFirst = rank > 2;
 
     switch (tier) {
@@ -212,7 +212,7 @@ const GapText = ({ isFirst, rank, gapToAbove, gapToFirst }: GapTextProps) => {
       default:
         return (
           <>
-            Only <span className="font-bold text-primary">{gapToAbove}</span> {giftWord} behind #{rank - 1}
+            Only <span className="font-bold text-primary">{gapToAbove}</span> {coinWord} behind #{rank - 1}
             {showFromFirst && (
               <>
                 {" "}· <span className="text-gold/80">{gapToFirst} from #1</span>

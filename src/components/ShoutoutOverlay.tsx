@@ -20,7 +20,7 @@ export const ShoutoutOverlay = ({ gifter }: Props) => {
           👑 THE MVP 👑
         </div>
         <div className="mt-4 sm:mt-6 inline-block rounded-2xl bg-gradient-throne px-4 py-2 sm:px-8 sm:py-3 font-display text-xl sm:text-3xl text-background">
-          {gifter.gifts} GIFTS STRONG
+          {gifter.gifts} COINS STRONG
         </div>
       </div>
     </div>
