@@ -127,6 +127,7 @@ export default {
         "shake": "shake 0.4s ease-in-out",
         "flame": "flame 1.5s ease-in-out infinite",
         "rank-flash": "rank-flash 0.6s ease-in-out 3",
+        "tier-fade": "tier-fade 0.25s ease-out",
       },
     },
   },
