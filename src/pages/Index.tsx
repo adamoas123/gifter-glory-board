@@ -25,6 +25,10 @@ const Index = () => {
   const [flashId, setFlashId] = useState<string | null>(null);
 
   const prevLeaderRef = useRef<string | null>(null);
+  const { muted, toggleMuted, play } = useCues();
+  const lastApproachAtRef = useRef(0);
+  const lastSwapAtRef = useRef(0);
+  const prevChallengerGapRef = useRef<number>(Infinity);
 
   const sorted = useMemo(() => [...gifters].sort((a, b) => b.gifts - a.gifts), [gifters]);
   const top5 = sorted.slice(0, 5);
