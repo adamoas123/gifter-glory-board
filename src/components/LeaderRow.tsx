@@ -10,7 +10,7 @@ interface Props {
 }
 
 const RANK_STYLES: Record<number, string> = {
-  1: "border-gold bg-gradient-to-r from-gold/30 via-gold/10 to-transparent animate-pulse-glow",
+  1: "border-gold/70 bg-gradient-to-r from-gold/15 via-gold/5 to-transparent shadow-[0_0_24px_-8px_hsl(var(--gold)/0.45)]",
   2: "border-silver/60 bg-silver/5",
   3: "border-bronze/60 bg-bronze/5",
 };
